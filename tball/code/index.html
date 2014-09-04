@@ -1,0 +1,64 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+  <title> The North Face </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <link type="text/css" rel="stylesheet" href="./script/style.css">
+    <script src="./script/jquery.min.js"></script>
+ </head>
+
+ <body>
+  <div id="" class="container">
+       <div id="" class="bg"><img src="./image/bg.png"></div>
+     <div id="" class="title"><img src="./image/t1.png"></div>
+      <div id="" class="al"><a href="javascript:void(0)"><img src="./image/al.png"></a></div>
+      <div id="" class="ar"><a href="javascript:void(0)"><img src="./image/ar.png"></a></div>
+     <div id="" class="gobutton">&nbsp;</div>
+      <div id="" class="show"><img  src="./image/demoshow_01.jpg"></div>
+  <!-- 
+-->
+  </div>
+ </body>
+</html>
+<script type="text/javascript">
+<!--
+    (function(){
+        // config start
+        var nDefaultIndex = 1;//默认显示哪个图片
+        var sShowParam = getUrlParam('c')||"demoshow";//来自url的c参数
+        var oIndex2TitleImg = ['./image/t1.png', './image/t2.png', './image/t3.png'];//3个title图片
+        var sImgDir = "./image/";//程序生成的图片目录
+        var sGoUrl = "http://www.baidu.com";//go跳转的url
+        // config end
+
+        var oIndex2ShowImg = [
+            sImgDir + sShowParam+'_04.jpg', 
+            sImgDir + sShowParam+'_04.jpg', 
+            sImgDir + sShowParam+'_04.jpg'
+        ];
+        $("div.container .al a").click(function(){
+            nDefaultIndex--;
+            var nIdnex = Math.abs(nDefaultIndex%3);
+             $("div.container .show img").attr('src', oIndex2ShowImg[nIdnex]);
+             $("div.container .title img").attr('src', oIndex2TitleImg[nIdnex]);
+        });
+        $("div.container .al a").click();
+        $("div.container .ar a").click(function(){
+            nDefaultIndex++;
+            var nIdnex = Math.abs(nDefaultIndex%3);
+             $("div.container .show img").attr('src', oIndex2ShowImg[nIdnex]);
+             $("div.container .title img").attr('src', oIndex2TitleImg[nIdnex]);
+        });
+        $("div.container .gobutton").click(function(){
+            location.href = sGoUrl;
+        });
+        function getUrlParam(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r!=null) return unescape(r[2]); return null; //返回参数值
+        } 
+    }());
+//-->
+</script>
