@@ -127,7 +127,7 @@ class Instagraph
     /usr/local/bin/convert d:/htdocs/work/waibao/imgmagic/code/meterial/shui.m2.png -resize "$width"x  d:/htdocs/work/waibao/imgmagic/shuirun.bg.tmp.png 
     /usr/local/bin/composite -dissolve 50  -gravity center  -alpha Set d:/htdocs/work/waibao/imgmagic/shuirun.bg.tmp.png d:/htdocs/work/waibao/imgmagic/input.tmp.jpg  d:/htdocs/work/waibao/imgmagic/output2.jpg
 */
-        $this->__neutrogena_script('shui.m2.png', 'shui');
+        $this->__neutrogena_script('shui.m4.png', 'shui');
         return $this->_output;
     }
     public function neutrogena_tou(){
@@ -158,7 +158,7 @@ class Instagraph
         if(!$this->my_file_exists($bgfile_tmp))$this->execute("/usr/local/bin/convert $bgfile -resize ".$nWidth."x  $bgfile_tmp");
 //        $this->execute("/usr/local/bin/composite -watermark  35  -gravity center  -alpha Set ".$bgfile_tmp." ".$input_tmp."  ".$this->_output);
 //        $this->execute("/usr/local/bin/composite -dissolve 45x100  -gravity center  -alpha Set ".$bgfile_tmp." ".$input_tmp."  ".$this->_output);
-        $this->execute("/usr/local/bin/composite -dissolve 50  -gravity center  -alpha Set ".$bgfile_tmp." ".$input_tmp."  ".$this->_output);
+        $this->execute("/usr/local/bin/composite -dissolve 100x100  -gravity center  -alpha Set ".$bgfile_tmp." ".$input_tmp."  ".$this->_output);
 //        $this->execute("/usr/local/bin/composite -dissolve 35x100  -gravity center  -alpha Set ".$bgfile_tmp." ".$input_tmp."  ".$this->_output);
     }
     public function neutrogena_tan(){
@@ -180,11 +180,19 @@ class Instagraph
         $input_tmp = $this->tempfile();
         $this->microtime_float();
         $this->execute("/usr/local/bin/convert $this->_image -resize 640x  $input_tmp");
-        $this->execute($this->_fredbin."aspectcrop -a 1:1 $this->_image $input_tmp");
+        
+        list($nWidth, $nHeight) = getimagesize($input_tmp);
+        $bgTanfile = $this->_meterialdir.'tan.bg.png';
+        $bgTanfile_tmp = $this->_tmpdir."meterial_".md5($bgTanfile)."_".$nWidth.".png";
+        if(!$this->my_file_exists($bgTanfile_tmp))$this->execute("/usr/local/bin/convert $bgTanfile -resize ".$nWidth."x  $bgTanfile_tmp");
+        $this->execute("/usr/local/bin/composite -dissolve 100x100  -gravity center  -alpha Set ".$bgTanfile_tmp." ".$input_tmp."  ".$input_tmp);
+
+
+        $this->execute($this->_fredbin."aspectcrop -a 1:1 $input_tmp $input_tmp");
          $this->microtime_float();
        $this->execute($this->_fredbin."spherize -b black -a 1.3 $input_tmp $input_tmp");
         $this->microtime_float();
-        $this->execute($this->_fredbin."feather -d 1 $input_tmp $input_tmp");
+//        $this->execute($this->_fredbin."feather -d 0.1 $input_tmp $input_tmp");
 //        $this->execute($this->_fredbin."softfocus -m 100 -O 80 $input_tmp $input_tmp");
 //        $this->execute($this->_fredbin."aspectcrop  -a 8:9 $input_tmp $input_tmp");
           $this->microtime_float();

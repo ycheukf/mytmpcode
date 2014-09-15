@@ -115,8 +115,27 @@ class wechatCallbackapiDemo
 //                                var_dump($apiContent[$content]);
         if (isset($apiContent[$content])) {
             //没有显示菜单,调用API,此处无法赋值数组
+            switch($apiContent[$content]['type']){
+                case 'text':
+                default:
+                    $resultStr = $this->_response_text($postObj, $apiContent[$content]['data'][0]);
+                    break;
+                case 'news':
+                    $newsContent = array();
+                    foreach ($apiContent[$content]['data'] as $aTmp) {
+                        $options = array(
+                            'title' => $aTmp[0],
+                            'description' => $aTmp[1],
+                            'picUrl' => $aTmp[2],
+                            'url' => $aTmp[3]
+                        );
+                        array_push($newsContent, $options);
+                    }
 
-            $resultStr = $this->_response_text($postObj, $apiContent[$content][0]);
+                    $resultStr = $this->_response_news($postObj, $newsContent);
+                   break;
+            }
+
         }else{
             $resultStr = $this->_response_text($postObj, _DEFAULTREPLY);
         }

@@ -2,6 +2,16 @@
 error_reporting(E_ALL);
 ini_set("display_errors","On");
 include_once(__DIR__."/Instagraph.class.php");
+
+/*
+  convert logo_trimmed.jpg  -liquid-rescale 75x100%\!  logo_lqr.jpg
+
+
+convert  d:/htdocs/work/waibao/mytmpcode/ntgwx/code/data/demo.jpg    -liquid-rescale 95%x115%\!  d:/htdocs/work/waibao/mytmpcode/ntgwx/code/data/output.jpg
+
+
+*/
+
 //$sShowImgSrc = "data/65cf281093a3a9cf991c4024836ca61f.tan.output.jpg";
 try
 {

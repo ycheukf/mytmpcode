@@ -27,3 +27,13 @@ imagemagik 最新版  下载地址(http://www.imagemagick.org/download/ImageMagi
 /usr/local/bin/composite
 
 
+======文件说明======
+Instagraph.class.php 图片处理类
+show.php 效果展示程序
+wx.config.php 微信配置文件
+wx.service.php 微信调用程序
+./bin imagemagic脚本目录
+./data 生成图片存放目录
+./tmp 临时文件生成目录
+./meterial 素材库
+./script 脚本库
