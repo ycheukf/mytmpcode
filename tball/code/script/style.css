@@ -52,20 +52,20 @@ float: left;
 width: 100%;
 }
 div.container div.title{
-margin-top: 22%;
+margin-top: 4%;
 margin-left: 36%;
 float: left;
 width: 28%;
 position: absolute;
 }
 div.container div.al{
-margin-top: -66%;
+margin-top: -104%;
 margin-right: 0%;
 float: right;
 width: 10%;
 }
 div.container div.ar{
-margin-top: -66%;
+margin-top: -104%;
 margin-left: 0%;
 float: left;
 width: 10%;
@@ -75,7 +75,7 @@ border: 0px red solid;
 width: 80%;
 height: 7%;
 float: left;
-margin-top: 134%;
+margin-top: 114%;
 margin-left: 10%;
 cursor: pointer;
 position: absolute;
@@ -87,10 +87,42 @@ float: left;
 border: 0px red solid;
 width: 49.1%;
 /* height: 163%; */
-margin-left: 25.5%;
+margin-left: 24.5%;
 }
 
 
+div.container div.in {
+position: absolute;
+bottom: 1.49%;
+/* float: left; */
+border: 0px red solid;
+left: 11%;
+width: 71%;
+/* z-index: -100; */
+}
+
+div.container div.out {
+position: absolute;
+bottom: 0%;
+/* float: left; */
+border: 0px red solid;
+/* left: 11%; */
+width: 100%;
+/* z-index: -100; */
+background-color: black;
+display:none;
+}
+
+
+div.container div.out_btn{
+display:none;
+border: 0px red solid;
+width: 19%;
+height: 11%;
+bottom: 25%;
+right: 1%;
+cursor: pointer;
+position: absolute;}
 
 
 

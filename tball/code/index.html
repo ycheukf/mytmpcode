@@ -11,32 +11,43 @@
  <body>
   <div id="" class="container">
        <div id="" class="bg"><img src="./image/bg.png"></div>
-     <div id="" class="title"><img src="./image/t1.png"></div>
+     <div id="" class="title"><img src="./image/t3.png"></div>
       <div id="" class="al"><a href="javascript:void(0)"><img src="./image/al.png"></a></div>
       <div id="" class="ar"><a href="javascript:void(0)"><img src="./image/ar.png"></a></div>
-     <div id="" class="gobutton">&nbsp;</div>
-      <div id="" class="show"><img  src="./image/demoshow_01.jpg"></div>
+     <!-- <div id="" class="gobutton" onclick="ga('send', 'event', 'custom','4.GO','4.GO');">&nbsp;</div>-->
+      <div id="" class="show"><img  src="./image/SHdemoshow_01.jpg"></div>
+      <div id="" class="in"><a href="javascript:void(0)" class="btn_in"><img  src="./image/in.png"></a></div>
+      <div id="" class="out"><img  src="./image/out.png"></div>
+      <div id="" class="out_btn"></div>
   <!-- 
 -->
   </div>
- </body>
-</html>
-<script type="text/javascript">
+  <script type="text/javascript">
 <!--
     (function(){
         // config start
         var nDefaultIndex = 1;//默认显示哪个图片
         var sShowParam = getUrlParam('c')||"demoshow";//来自url的c参数
-        var oIndex2TitleImg = ['./image/t1.png', './image/t2.png', './image/t3.png'];//3个title图片
-        var sImgDir = "./image/";//程序生成的图片目录
+        var oIndex2TitleImg = ['./image/t3.png', './image/t2.png', './image/t1.png'];//3个title图片
+        var sImgDir = "../upimage/";//程序生成的图片目录
         var sGoUrl = "http://www.baidu.com";//go跳转的url
         // config end
 
         var oIndex2ShowImg = [
-            sImgDir + sShowParam+'_04.jpg', 
-            sImgDir + sShowParam+'_04.jpg', 
-            sImgDir + sShowParam+'_04.jpg'
+            sImgDir + sShowParam+'_01.jpg', 
+            sImgDir + sShowParam+'_02.jpg', 
+            sImgDir + sShowParam+'_03.jpg'
         ];
+        $("div.in a").click(function(){
+            $("div.out").toggle();
+            $("div.out_btn").toggle();
+        });
+
+        $("div.out_btn").click(function(){
+            $("div.out").toggle();
+            $("div.out_btn").toggle();
+        });
+
         $("div.container .al a").click(function(){
             nDefaultIndex--;
             var nIdnex = Math.abs(nDefaultIndex%3);
@@ -62,3 +73,97 @@
     }());
 //-->
 </script>
+  	<script>
+	        function getUrlParam(name)
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r!=null) return unescape(r[2]); return null; //返回参数值
+        } 
+var imgUrl = 'http://m.thenorthface.com.cn/event/tballtouch/images/share.jpg';
+var lineLink = 'http://m.thenorthface.com.cn/event/tballtouch/htmlcode/index.html?c=';
+var shareTitle = '在北面平行世界，你到底有几面？';
+var appid = 'wxf1390c5456aaf77a';
+var code = getUrlParam('c')||"SHdemoshow";
+var city = code.substr(0,2);
+var address;
+if(city=="SH"){
+address="上海久光百货6F扶梯口";
+}else if(city=="SY"){
+address="沈阳中街新玛特6F中庭";
+}else if(city=="BJ"){
+address="北京三里屯橱窗";
+}else{
+address="上海久光百货6F扶梯口";
+}
+
+var descContent = "从镜面穿越幻像，克隆另一个自己！我在："+address;
+var descContent1 = "在北面平行世界，你到底有几面？从镜面穿越幻像，克隆另一个自己！我在："+address;
+
+function shareFriend() {
+    WeixinJSBridge.invoke('sendAppMessage',{
+        "appid": appid,
+        "img_url": imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": lineLink+code,
+        "desc": descContent,
+        "title": shareTitle
+    }, function(res) {
+        //_report('send_msg', res.err_msg);
+    });
+}
+function shareTimeline() {
+    WeixinJSBridge.invoke('shareTimeline',{
+        "img_url": imgUrl,
+        "img_width": "200",
+        "img_height": "200",
+        "link": lineLink+code,
+        "desc": descContent1,
+        "title": descContent1
+    }, function(res) {
+           //_report('timeline', res.err_msg);
+    });
+}
+function shareWeibo() {
+    WeixinJSBridge.invoke('shareWeibo',{
+        "content": descContent,
+        "url": lineLink+code,
+    }, function(res) {
+        //_report('weibo', res.err_msg);
+    });
+}
+// 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	WeixinJSBridge.call('showOptionMenu');
+    // 发送给好友
+    WeixinJSBridge.on('menu:share:appmessage', function(argv){
+		ga('send', 'event', 'custom','1.分享好友','1.分享好友');
+        shareFriend();
+    });
+    // 分享到朋友圈
+    WeixinJSBridge.on('menu:share:timeline', function(argv){
+		ga('send', 'event', 'custom','2.分享朋友圈','2.分享朋友圈');
+        shareTimeline();
+    });
+    // 分享到微博
+    WeixinJSBridge.on('menu:share:weibo', function(argv){
+		ga('send', 'event', 'custom','3.分享微博','3.分享微博');
+        shareWeibo();
+    });
+}, false);
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-54781448-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+ </body>
+</html>
